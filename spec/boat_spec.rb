@@ -20,8 +20,11 @@ end
 
     expect(kayak.hours_rented).to eq(0)
     kayak.add_hour
+    kayak.add_hour
+    kayak.add_hour
 
-    expect(kayak.hours_rented).to eq(1)
+
+    expect(kayak.hours_rented).to eq(3)
   end
 
 end
