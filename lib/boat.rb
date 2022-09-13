@@ -9,4 +9,6 @@ attr_reader :type, :price_per_hour, :hours_rented
   def add_hour
     @hours_rented += 1
   end
+
+
 end

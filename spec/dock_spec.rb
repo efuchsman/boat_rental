@@ -63,6 +63,11 @@ RSpec.describe Dock do
       :amount => 40})
       expect(dock.charge(sup_1)).to eq({:card_number => "1313131313131313", :amount => 45})
 
+      sup_1.add_hour
+      sup_1.add_hour
+
+      expect(dock.charge(sup_1)).to eq({:card_number => "1313131313131313", :amount => 45})
+
   end
 
 end

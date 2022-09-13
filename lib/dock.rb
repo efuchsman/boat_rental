@@ -14,7 +14,11 @@ class Dock
 
   def rental_amount(boat)
     @boat = boat
+    if boat.hours_rented < @max_rental_time
     boat.price_per_hour * boat.hours_rented
+    else
+      boat.price_per_hour * @max_rental_time
+    end
   end
 
   def card_number(boat)
