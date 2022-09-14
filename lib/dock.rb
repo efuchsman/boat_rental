@@ -5,6 +5,7 @@ class Dock
     @name = name
     @max_rental_time = max_rental_time
     @rental_log = {}
+    @revenue = 0
   end
 
   def rent(boat, renter)
@@ -12,23 +13,24 @@ class Dock
     @rental_log[boat] = renter
   end
 
-
-
-  def charge(boat)
-
-  @boat = boat
-
+  def rental_amount(boat)
+    @boat = boat
     if boat.hours_rented < @max_rental_time
       amount = boat.price_per_hour * boat.hours_rented
      else
       amount = boat.price_per_hour * @max_rental_time
     end
 
+  end
+
+  def charge(boat)
+
+  @boat = boat
+
   hash = {
     :card_number => @rental_log[boat].credit_card_number,
-    :amount => amount
-
-  }
+    :amount => rental_amount(boat)
+          }
 
   end
 
@@ -38,8 +40,12 @@ class Dock
     end
   end
 
+  def return(boat)
+    @boat = boat
+    @revenue += rental_amount(boat)
+    @rental_log.delete(boat)
 
-
+  end
 
 
 end
