@@ -70,4 +70,33 @@ RSpec.describe Dock do
 
   end
 
+  it "can log hours" do
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    sup_1 = Boat.new(:standup_paddle_board, 15)
+    sup_2 = Boat.new(:standup_paddle_board, 15)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    eugene = Renter.new("Eugene Crabs", "1313131313131313")
+
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+
+    dock.log_hour
+
+
+    expect(kayak_1.hours_rented).to eq(1)
+    expect(kayak_2.hours_rented).to eq(1)
+
+    dock.rent(canoe, patrick)
+
+    dock.log_hour
+    expect(kayak_1.hours_rented).to eq(2)
+    expect(kayak_2.hours_rented).to eq(2)
+    expect(canoe.hours_rented).to eq(1)
+
+
+  end
+
 end
